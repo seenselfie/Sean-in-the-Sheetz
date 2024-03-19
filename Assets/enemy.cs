@@ -15,22 +15,22 @@ public class enemy : MonoBehaviour
     public Transform player;
     Transform currentDest;
     Vector3 dest;
-    int randNum;
-    public int destinationAmount;
     public Vector3 rayCastOffset;
     public string deathScene;
+    public float aiDistance;
+    public GameObject hideText, stopHideText;
 
     void Start()
     {
         walking = true;
-        randNum = Random.Range(0, destinationAmount);
-        currentDest = destinations[randNum];
+        currentDest = destinations[Random.Range(0, destinations.Count)];
     }
 
     void Update()
     {
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
+        aiDistance = Vector3.Distance(player.position, this.transform.position);
         if (Physics.Raycast(transform.position + rayCastOffset, direction, out hit, sightDistance))
         {
             if (hit.collider.gameObject.tag == "Player")
@@ -51,11 +51,13 @@ public class enemy : MonoBehaviour
             aiAnim.ResetTrigger("walk");
             aiAnim.SetTrigger("sprint");
 
-            if (ai.remainingDistance <= catchDistance)
+            if (aiDistance <= catchDistance)
             {
                 player.gameObject.SetActive(false); //death
                 aiAnim.ResetTrigger("idle ");
                 aiAnim.ResetTrigger("walk");
+                hideText.SetActive(false);
+                stopHideText.SetActive(false);
                 aiAnim.ResetTrigger("sprint");
                 aiAnim.SetTrigger("jumpscare");
                 StartCoroutine(deathRoutine());
@@ -84,13 +86,20 @@ public class enemy : MonoBehaviour
 
             }
         }
+    }
+    public void stopChase()
+    {
+        walking = true;
+        chasing = false;
+        StopCoroutine("chaseRoutine");
+        currentDest = destinations[Random.Range(0, destinations.Count)];
+    }
         IEnumerator stayIdle()
         {
             idleTime = Random.Range(minIdleTime, maxIdleTime);
             yield return new WaitForSeconds(idleTime);
             walking = true;
-            randNum = Random.Range(0, destinationAmount);
-            currentDest = destinations[randNum];
+            currentDest = destinations[Random.Range(0, destinations.Count)];
 
 
         }
@@ -98,10 +107,8 @@ public class enemy : MonoBehaviour
         {
             chaseTime = Random.Range(minChaseTime, maxChaseTime);
             yield return new WaitForSeconds(chaseTime);
-            walking = true;
-            chasing = false;
-            randNum = Random.Range(0, destinationAmount);
-            currentDest = destinations[randNum];
+           
+        stopChase();
            
         }
         IEnumerator deathRoutine()
@@ -109,5 +116,5 @@ public class enemy : MonoBehaviour
             yield return new WaitForSeconds(jumpscareTime);
             SceneManager.LoadScene(deathScene);
         }
-    }
+    
 }
