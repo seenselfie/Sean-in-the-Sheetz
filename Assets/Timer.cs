@@ -40,18 +40,15 @@ public class Timer : MonoBehaviour
         if (timeRemaining >= 0 && timeRemaining <= 60)
         {
             objective.text = spillClean;
-            objective.color = Color.yellow;
         }
         else if (timeRemaining >= 61 && timeRemaining <= 120)
         {
             objective.text = pickup;
-            objective.color = Color.yellow;
 
         }
         else if (timeRemaining >= 121 && timeRemaining <= 180)
         {
             objective.text = odor;
-            objective.color = Color.yellow;
 
         }
     }
