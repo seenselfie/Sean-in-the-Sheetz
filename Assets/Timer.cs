@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class Timer : MonoBehaviour
                 timeRemaining += Time.deltaTime;
                 DisplayTime(timeRemaining);
             }
+        }
+        if(timeRemaining >= 180)
+        {
+            SceneManager.LoadScene(1);
         }
     }
     void DisplayTime (float timeToDisplay)
