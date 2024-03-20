@@ -1,0 +1,11 @@
+Model Information:
+* title:	Anatomical study submission
+* source:	https://sketchfab.com/3d-models/anatomical-study-submission-1772ec3549ff405bbcdd4fdbe5c9f358
+* author:	mmeitus (https://sketchfab.com/mmeitus)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Anatomical study submission" (https://sketchfab.com/3d-models/anatomical-study-submission-1772ec3549ff405bbcdd4fdbe5c9f358) by mmeitus (https://sketchfab.com/mmeitus) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
